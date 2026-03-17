@@ -1,15 +1,16 @@
+import os
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, Message
 from supabase import create_client, Client as SupabaseClient
 
 # --- CONFIGURATION ---
-API_ID = "YOUR_API_ID"
-API_HASH = "YOUR_API_HASH"
-BOT_TOKEN = "YOUR_BOT_TOKEN"
+API_ID = os.environ.get('YOUR_API_ID')
+API_HASH = os.environ.get('YOUR_API_HASH')
+BOT_TOKEN = os.environ.get('YOUR_BOT_TOKEN')
 
-SUPABASE_URL = "YOUR_SUPABASE_URL"
-SUPABASE_KEY = "YOUR_SUPABASE_SERVICE_ROLE_KEY" # Use service role key to bypass RLS
+SUPABASE_URL = os.environ.get('YOUR_SUPABASE_URL')
+SUPABASE_KEY = os.environ.get('YOUR_SUPABASE_SERVICE_ROLE_KEY') # Use service role key to bypass RLS
 
 # Initialize Supabase and Pyrogram
 supabase: SupabaseClient = create_client(SUPABASE_URL, SUPABASE_KEY)
