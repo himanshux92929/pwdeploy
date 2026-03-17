@@ -192,10 +192,24 @@ async def handle_state_input(client, message):
         await message.reply("✅ **Task successfully added to database!**", reply_markup=get_main_menu())
 
 # --- RUN THE BOT ---
+async def main():
+    # Start the client
+    await app.start()
+    print("🚀 Bot is online and worker starting...")
+    
+    # Start the background task
+    asyncio.create_task(auto_forward_worker())
+    
+    # Keep the bot running and listening for commands
+    await idle()
+    
+    # Stop gracefully on exit
+    await app.stop()
+
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.create_task(auto_forward_worker())
     try:
-        loop.run_forever()
+        # Proper way to run Pyrogram with custom async tasks
+        from pyrogram import idle
+        app.run(main())
     except KeyboardInterrupt:
-        print("Shutting down...")
+        print("Stopping...")
