@@ -1,4 +1,6 @@
 import os
+print(f"DEBUG: YOUR_SUPABASE_URL is: {os.environ.get('YOUR_SUPABASE_URL')}")
+import os
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, Message
